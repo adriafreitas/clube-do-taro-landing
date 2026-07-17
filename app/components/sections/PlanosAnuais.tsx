@@ -1,95 +1,219 @@
 "use client";
 
+import Container from "../ui/Container";
+import PrimaryButton from "../ui/PrimaryButton";
+
 const planos = [
   {
-    nome: "Plano Bronze Anual",
-    descricao: "Plano Anual do Clube do Tarô",
-    valor: "R$ 298,86",
-    periodo: "/anual",
+    nome: "Bronze",
+    cor: "#C084FC",
+    glow: "rgba(192,132,252,.28)",
+    badge: "15% OFF",
+    parcelas: "12x",
+    valor: "24,91",
+    pix: "R$ 298,86",
+    descricao: "Economize 15% escolhendo o plano anual.",
+    beneficios: [
+      "Tudo do Bronze",
+      "Economia de 15%",
+      "12 meses de acesso",
+      "Conteúdo atualizado",
+    ],
     link: "https://invoice.infinitepay.io/plans/adriafreitas/o99vCY8Esy",
   },
   {
-    nome: "Plano Prata Anual",
-    descricao: "Plano Anual Prata",
-    valor: "R$ 491,00",
-    periodo: "/anual",
+    nome: "Prata",
+    cor: "#D1D5DB",
+    glow: "rgba(209,213,219,.25)",
+    badge: "15% OFF",
+    parcelas: "12x",
+    valor: "40,92",
+    pix: "R$ 491,00",
+    descricao: "Mais benefícios pagando menos.",
+    beneficios: [
+      "Tudo do Prata",
+      "Economia de 15%",
+      "12 meses de acesso",
+      "Atualizações inclusas",
+    ],
     link: "https://invoice.infinitepay.io/plans/adriafreitas/IBW6bjC0KT",
   },
   {
-    nome: "Plano Ouro Anual",
-    descricao: "Plano Anual Ouro",
-    valor: "R$ 754,80",
-    periodo: "/anual",
+    nome: "Ouro",
+    cor: "#FACC15",
+    glow: "rgba(250,204,21,.28)",
+    badge: "MAIS VENDIDO",
+    parcelas: "12x",
+    valor: "62,90",
+    pix: "R$ 754,80",
+    descricao: "Plano anual para quem busca evolução constante.",
+    beneficios: [
+      "Tudo do Ouro",
+      "Economia de 15%",
+      "12 meses de acesso",
+      "Novidades inclusas",
+    ],
     link: "https://invoice.infinitepay.io/plans/adriafreitas/IF7YpWElDp",
   },
   {
-    nome: "Plano Diamante Anual",
-    descricao: "Plano Anual Diamante",
-    valor: "R$ 1.672,80",
-    periodo: "/anual",
+    nome: "Diamante",
+    cor: "#60A5FA",
+    glow: "rgba(96,165,250,.28)",
+    badge: "VIP",
+    parcelas: "12x",
+    valor: "139,40",
+    pix: "R$ 1.672,80",
+    descricao: "A experiência completa com o melhor custo-benefício.",
+    beneficios: [
+      "Tudo liberado",
+      "Economia de 15%",
+      "12 meses de acesso",
+      "Todos os benefícios VIP",
+    ],
     link: "https://invoice.infinitepay.io/plans/adriafreitas/7Cdzp9q2Aj",
   },
 ];
 
 export default function PlanosAnuais() {
   return (
-    <section
-      id="planos-anuais"
-      className="py-24 bg-gradient-to-b from-[#1a0826] to-[#12051b]"
-    >
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="planos-anuais" className="bg-[#12081E] py-24 text-white">
 
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-yellow-400">
-            Planos Anuais
+      <Container>
+
+        <div className="mx-auto mb-16 max-w-3xl text-center">
+
+          <span className="rounded-full border border-violet-500/30 bg-violet-500/10 px-5 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-violet-300">
+            ⭐ ECONOMIZE 15%
+          </span>
+
+          <h2 className="mt-6 font-serif text-5xl font-semibold lg:text-6xl">
+            Assinaturas Anuais
           </h2>
 
-          <p className="text-gray-300 mt-4 text-lg">
-            Economize pagando uma única vez e tenha acesso durante todo o ano.
+          <p className="mt-6 text-lg leading-8 text-gray-300">
+            Garanta um ano inteiro de acesso e economize 15% pagando
+            à vista no PIX.
           </p>
-        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        </div>
+      <div className="mx-auto grid max-w-[1500px] gap-6 md:grid-cols-2 xl:grid-cols-4">
           {planos.map((plano) => (
             <div
               key={plano.nome}
-              className="bg-white rounded-3xl shadow-xl p-8 flex flex-col justify-between"
+              className="relative overflow-hidden rounded-[30px] border border-white/10 bg-[#1A1028] p-10 transition-all duration-300 hover:-translate-y-2"
+style={{
+  boxShadow: `0 0 18px ${plano.glow}`
+}}
             >
-              <div>
-                <h3 className="text-2xl font-bold text-[#4B1E6D] mb-2">
-                  {plano.nome}
-                </h3>
+              <div
+  className="mb-6 inline-flex rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.25em]"
+  style={{
+    background: `${plano.cor}20`,
+    color: plano.cor,
+    border: `1px solid ${plano.cor}40`,
+  }}
+>
+  {plano.badge}
+</div>
 
-                <p className="text-gray-500 mb-8">
-                  {plano.descricao}
-                </p>
+              <h3
+  className="font-serif text-4xl font-semibold tracking-wide"
+  style={{ color: plano.cor }}
+>
+  {plano.nome}
+</h3>
 
-                <div className="mb-8">
-                  <span className="text-4xl font-extrabold text-[#4B1E6D]">
-                    {plano.valor}
-                  </span>
+              <p className="mt-3 min-h-[60px] text-sm leading-6 text-gray-300">
+                {plano.descricao}
+              </p>
 
-                  <span className="text-gray-500">
-                    {" "}
-                    {plano.periodo}
-                  </span>
-                </div>
+              <div className="mt-8">
+                <div className="mt-8 flex items-end gap-2">
+
+  <span className="text-lg text-gray-400">
+    {plano.parcelas} de
+  </span>
+
+  <span className="text-lg text-gray-400">
+    R$
+  </span>
+
+  <span
+    className="text-5xl font-bold leading-none"
+    style={{ color: plano.cor }}
+  >
+    {plano.valor}
+  </span>
+
+  <span className="text-base text-gray-500 mb-1">*</span>
+
+</div>
+
+                <p className="mt-2 text-sm uppercase tracking-[0.25em] text-gray-400">
+  NO CARTÃO
+</p>
               </div>
 
-              <a
-                href={plano.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full"
-              >
-                <button className="w-full bg-[#4B1E6D] hover:bg-[#6C2EA0] text-white font-semibold py-4 rounded-xl transition-all duration-300">
-                  FAZER PARTE
-                </button>
-              </a>
+              <div
+  className="mt-6 rounded-2xl border bg-black/20 p-4"
+  style={{
+    borderColor: `${plano.cor}40`,
+  }}
+>
+                <p
+  className="text-xs font-semibold uppercase tracking-[0.3em]"
+  style={{ color: plano.cor }}
+>
+  À VISTA NO PIX
+</p>
+
+                <p className="mt-2 text-2xl font-bold text-white">
+  {plano.pix}
+</p>
+              </div>
+
+              <ul className="mt-8 space-y-4">
+                {plano.beneficios.map((beneficio) => (
+                  <li
+  key={beneficio}
+  className="flex items-center gap-3 text-gray-300"
+>
+  <span
+    className="h-2.5 w-2.5 rounded-full"
+    style={{
+      background: plano.cor,
+      boxShadow: `0 0 12px ${plano.cor}`,
+    }}
+  />
+  {beneficio}
+</li>
+                ))}
+              </ul>
+
+             <div className="mt-10">
+  <a
+    href={plano.link}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="block w-full rounded-full border py-3 text-center text-sm font-semibold uppercase tracking-[0.25em] transition-all duration-300 hover:scale-[1.02]"
+    style={{
+      borderColor: plano.cor,
+      color: plano.cor,
+    }}
+  >
+    FAZER PARTE
+  </a>
+</div>
+              <p className="mt-6 text-center text-xs text-gray-500">
+                *Parcelamento sujeito aos juros da operadora do cartão.
+              </p>
             </div>
           ))}
         </div>
-      </div>
+
+      </Container>
+
     </section>
   );
 }
+       
