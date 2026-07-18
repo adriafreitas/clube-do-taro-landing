@@ -200,7 +200,7 @@ export default function PlanosMensais() {
 <button
   type="button"
   onClick={() => comprar(plano.produtoId)}
-  className="w-full rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 px-6 py-4 text-sm font-bold uppercase tracking-[0.25em] text-white transition-all hover:scale-105"
+  cclassName="mt-2 flex h-12 w-full items-center justify-center rounded-full bg-gradient-to-r from-violet-700 via-fuchsia-600 to-purple-600 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-violet-500/40"
 >
   Quero fazer parte
 </button>
