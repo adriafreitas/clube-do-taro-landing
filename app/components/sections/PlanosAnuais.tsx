@@ -1,11 +1,12 @@
 "use client";
 
 import Container from "../ui/Container";
-import PrimaryButton from "../ui/PrimaryButton";
+
 
 const planos = [
   {
     nome: "Bronze",
+    produtoId: "bronze-anual",
     cor: "#C084FC",
     glow: "rgba(192,132,252,.28)",
     badge: "15% OFF",
@@ -23,6 +24,7 @@ const planos = [
   },
   {
     nome: "Prata",
+    produtoId: "prata-anual",
     cor: "#D1D5DB",
     glow: "rgba(209,213,219,.25)",
     badge: "15% OFF",
@@ -40,6 +42,7 @@ const planos = [
   },
   {
     nome: "Ouro",
+    produtoId: "ouro-anual",
     cor: "#FACC15",
     glow: "rgba(250,204,21,.28)",
     badge: "MAIS VENDIDO",
@@ -57,6 +60,7 @@ const planos = [
   },
   {
     nome: "Diamante",
+    produtoId: "diamante-anual",
     cor: "#60A5FA",
     glow: "rgba(96,165,250,.28)",
     badge: "VIP",
@@ -75,6 +79,47 @@ const planos = [
 ];
 
 export default function PlanosAnuais() {
+async function comprar(produtoId: string) {
+  try {
+    const mapaPlanos = {
+      "bronze-anual": { plano: "Bronze Anual", valor: 298.86 },
+      "prata-anual": { plano: "Prata Anual", valor: 491.0 },
+      "ouro-anual": { plano: "Ouro Anual", valor: 754.8 },
+      "diamante-anual": { plano: "Diamante Anual", valor: 1672.8 },
+    };
+
+    const plano = mapaPlanos[produtoId as keyof typeof mapaPlanos];
+
+    const res = await fetch(
+      "https://clube-do-taro.vercel.app/api/pagamentos/mercadopago/criar-preferencia",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nome: "Novo Assinante",
+          email: "cliente@temporario.com",
+          plano: plano.plano,
+          valor: plano.valor,
+        }),
+      }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.erro || "Erro ao iniciar pagamento.");
+      return;
+    }
+
+    window.location.href = data.initPoint;
+  } catch (error) {
+    console.error(error);
+    alert("Erro ao conectar com o servidor.");
+  }
+}
+
   return (
     <section id="planos-anuais" className="bg-[#12081E] py-24 text-white">
 
@@ -191,18 +236,14 @@ style={{
               </ul>
 
              <div className="mt-10">
-  <a
-    href={plano.link}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="block w-full rounded-full border py-3 text-center text-sm font-semibold uppercase tracking-[0.25em] transition-all duration-300 hover:scale-[1.02]"
-    style={{
-      borderColor: plano.cor,
-      color: plano.cor,
-    }}
-  >
-    FAZER PARTE
-  </a>
+ 
+    <button
+  onClick={() => comprar(plano.produtoId)}
+  className="block w-full rounded-full border py-3 text-center text-sm font-semibold uppercase transition-all"
+>
+  Quero fazer parte
+</button>
+
 </div>
               <p className="mt-6 text-center text-xs text-gray-500">
                 *Parcelamento sujeito aos juros da operadora do cartão.

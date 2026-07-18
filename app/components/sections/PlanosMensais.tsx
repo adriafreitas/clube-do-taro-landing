@@ -10,7 +10,6 @@ const planos = [
   cor: "#B87333",
   glow: "rgba(184,115,51,.18)",
   badge: "",
-  link: "https://mpago.la/1rWP4T9",
   beneficios: [
     "Direcionamentos Semanais",
     "Biblioteca Digital",
@@ -198,16 +197,7 @@ export default function PlanosMensais() {
 
 </ul>
 
-<button
-  onClick={() => comprar(plano.produtoId)}
-  className="mt-12 block w-full rounded-full py-3.5 text-center text-[14px] font-semibold uppercase tracking-[0.25em]"
-  style={{
-    color: plano.cor,
-    border: `1px solid ${plano.cor}55`,
-    background: "rgba(255,255,255,.02)",
-    cursor: "pointer",
-  }}
->
+<button onClick={() => comprar(plano.produtoId)}>
   TESTE MERCADO PAGO
 </button>
 
