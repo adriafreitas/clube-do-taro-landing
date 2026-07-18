@@ -197,8 +197,12 @@ export default function PlanosMensais() {
 
 </ul>
 
-<button onClick={() => comprar(plano.produtoId)}>
-  TESTE MERCADO PAGO
+<button
+  type="button"
+  onClick={() => comprar(plano.produtoId)}
+  className="w-full rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 px-6 py-4 text-sm font-bold uppercase tracking-[0.25em] text-white transition-all hover:scale-105"
+>
+  Quero fazer parte
 </button>
 
             </div>
