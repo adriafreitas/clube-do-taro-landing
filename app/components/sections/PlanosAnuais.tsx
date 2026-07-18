@@ -8,6 +8,7 @@ const planos = [
     nome: "Bronze",
     produtoId: "bronze-anual",
     cor: "#C084FC",
+    link: "https://mpago.la/1ym2YqY",
     glow: "rgba(192,132,252,.28)",
     badge: "15% OFF",
     parcelas: "12x",
@@ -26,6 +27,7 @@ const planos = [
     nome: "Prata",
     produtoId: "prata-anual",
     cor: "#D1D5DB",
+    link: "https://mpago.la/1WwHtu9",
     glow: "rgba(209,213,219,.25)",
     badge: "15% OFF",
     parcelas: "12x",
@@ -44,6 +46,7 @@ const planos = [
     nome: "Ouro",
     produtoId: "ouro-anual",
     cor: "#FACC15",
+    link: "https://mpago.la/2qUR8dK",
     glow: "rgba(250,204,21,.28)",
     badge: "MAIS VENDIDO",
     parcelas: "12x",
@@ -62,6 +65,7 @@ const planos = [
     nome: "Diamante",
     produtoId: "diamante-anual",
     cor: "#60A5FA",
+    link: "https://mpago.la/2rFVGH8",
     glow: "rgba(96,165,250,.28)",
     badge: "VIP",
     parcelas: "12x",
@@ -79,46 +83,7 @@ const planos = [
 ];
 
 export default function PlanosAnuais() {
-async function comprar(produtoId: string) {
-  try {
-    const mapaPlanos = {
-      "bronze-anual": { plano: "Bronze Anual", valor: 298.86 },
-      "prata-anual": { plano: "Prata Anual", valor: 491.0 },
-      "ouro-anual": { plano: "Ouro Anual", valor: 754.8 },
-      "diamante-anual": { plano: "Diamante Anual", valor: 1672.8 },
-    };
 
-    const plano = mapaPlanos[produtoId as keyof typeof mapaPlanos];
-
-    const res = await fetch(
-      "https://clube-do-taro.vercel.app/api/pagamentos/mercadopago/criar-preferencia",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          nome: "Novo Assinante",
-          email: "cliente@temporario.com",
-          plano: plano.plano,
-          valor: plano.valor,
-        }),
-      }
-    );
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      alert(data.erro || "Erro ao iniciar pagamento.");
-      return;
-    }
-
-    window.location.href = data.initPoint;
-  } catch (error) {
-    console.error(error);
-    alert("Erro ao conectar com o servidor.");
-  }
-}
 
   return (
     <section id="planos-anuais" className="bg-[#12081E] py-24 text-white">
@@ -237,12 +202,14 @@ style={{
 
              <div className="mt-10">
  
-    <button
-  onClick={() => comprar(plano.produtoId)}
-  className="block w-full rounded-full border py-3 text-center text-sm font-semibold uppercase transition-all"
+   <a
+  href={plano.link}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="mt-2 flex h-12 w-full items-center justify-center rounded-full bg-gradient-to-r from-violet-700 via-fuchsia-600 to-purple-600 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-violet-500/40"
 >
   Quero fazer parte
-</button>
+</a>
 
 </div>
               <p className="mt-6 text-center text-xs text-gray-500">
