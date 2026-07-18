@@ -8,6 +8,7 @@ const planos = [
   valor: "R$ 29,30",
   produtoId: "bronze",
   cor: "#B87333",
+  link: "https://mpago.la/2ZBPjxV",
   glow: "rgba(184,115,51,.18)",
   badge: "",
   beneficios: [
@@ -21,6 +22,7 @@ const planos = [
     valor: "R$ 49,91",
     produtoId: "prata",
     cor: "#D9D9E6",
+    link: "https://mpago.la/2wD94Lo",
     glow: "rgba(217,217,230,.16)",
     badge: "",
     beneficios: [
@@ -34,6 +36,7 @@ const planos = [
     valor: "R$ 74,00",
     produtoId: "ouro",
     cor: "#E9C46A",
+    link: "https://mpago.la/1jZFLvD",
     glow: "rgba(233,196,106,.25)",
     badge: "Mais Escolhido",
     beneficios: [
@@ -47,6 +50,7 @@ const planos = [
     valor: "R$ 164,00",
     produtoId: "diamante",
     cor: "#8ED8FF",
+     link: "https://mpago.la/2dW59EK",
     glow: "rgba(142,216,255,.22)",
     badge: "Experiência Completa",
     beneficios: [
@@ -58,47 +62,7 @@ const planos = [
 ];
 export default function PlanosMensais() {
 
-  async function comprar(produtoId: string) {
-  try {
-    const mapaPlanos = {
-      bronze: { plano: "Bronze", valor: 29.3 },
-      prata: { plano: "Prata", valor: 49.91 },
-      ouro: { plano: "Ouro", valor: 74.0 },
-      diamante: { plano: "Diamante", valor: 164.0 },
-    };
-
-    const plano = mapaPlanos[produtoId as keyof typeof mapaPlanos];
-
-    const res = await fetch(
-      "https://clube-do-taro.vercel.app/api/pagamentos/mercadopago/criar-preferencia",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          nome: "Novo Assinante",
-          email: "cliente@temporario.com",
-          plano: plano.plano,
-          valor: plano.valor,
-        }),
-      }
-    );
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      alert(data.erro || "Erro ao iniciar pagamento.");
-      return;
-    }
-
-    window.location.href = data.initPoint;
-  } catch (error) {
-    console.error(error);
-    alert("Erro ao conectar com o servidor.");
-  }
-}
-
+  
   return (
     <section
       id="planos-mensais"
@@ -197,13 +161,14 @@ export default function PlanosMensais() {
 
 </ul>
 
-<button
-  type="button"
-  onClick={() => comprar(plano.produtoId)}
+<a
+  href={plano.link}
+  target="_blank"
+  rel="noopener noreferrer"
   className="mt-2 flex h-12 w-full items-center justify-center rounded-full bg-gradient-to-r from-violet-700 via-fuchsia-600 to-purple-600 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-violet-500/40"
 >
   Quero fazer parte
-</button>
+</a>
 
             </div>
           ))}
