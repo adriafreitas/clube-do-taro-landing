@@ -4,7 +4,7 @@ const planos = [
   {
     nome: "Bronze",
     valor: "R$ 29,30",
-    link: "https://invoice.infinitepay.io/plans/adriafreitas/PsHzWILkod",
+    link: "https://invoice.infinitepay.io/plans/adriafreitas/105eIC8ATO",
     cor: "#B87333",
     glow: "rgba(184,115,51,.18)",
     badge: "",
