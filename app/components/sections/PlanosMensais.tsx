@@ -4,18 +4,19 @@ import Container from "../ui/Container";
 
 const planos = [
   {
-    nome: "Bronze",
-    valor: "R$ 29,30",
-    produtoId: "bronze",
-    cor: "#B87333",
-    glow: "rgba(184,115,51,.18)",
-    badge: "",
-    beneficios: [
-      "Direcionamentos Semanais",
-      "Biblioteca Digital",
-      "Conteúdos Exclusivos",
-    ],
-  },
+  nome: "Bronze",
+  valor: "R$ 29,30",
+  produtoId: "bronze",
+  cor: "#B87333",
+  glow: "rgba(184,115,51,.18)",
+  badge: "",
+  link: "https://mpago.la/1rWP4T9",
+  beneficios: [
+    "Direcionamentos Semanais",
+    "Biblioteca Digital",
+    "Conteúdos Exclusivos",
+  ],
+},
   {
     nome: "Prata",
     valor: "R$ 49,91",
