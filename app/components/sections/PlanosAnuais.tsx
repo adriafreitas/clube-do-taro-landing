@@ -19,7 +19,7 @@ const planos = [
       "12 meses de acesso",
       "Conteúdo atualizado",
     ],
-    link: "https://invoice.infinitepay.io/plans/adriafreitas/o99vCY8Esy",
+  
   },
   {
     nome: "Prata",
@@ -36,7 +36,7 @@ const planos = [
       "12 meses de acesso",
       "Atualizações inclusas",
     ],
-    link: "https://invoice.infinitepay.io/plans/adriafreitas/IBW6bjC0KT",
+  
   },
   {
     nome: "Ouro",
@@ -53,7 +53,7 @@ const planos = [
       "12 meses de acesso",
       "Novidades inclusas",
     ],
-    link: "https://invoice.infinitepay.io/plans/adriafreitas/IF7YpWElDp",
+   
   },
   {
     nome: "Diamante",
@@ -70,7 +70,7 @@ const planos = [
       "12 meses de acesso",
       "Todos os benefícios VIP",
     ],
-    link: "https://invoice.infinitepay.io/plans/adriafreitas/7Cdzp9q2Aj",
+  
   },
 ];
 

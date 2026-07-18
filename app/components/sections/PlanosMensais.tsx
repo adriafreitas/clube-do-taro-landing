@@ -1,3 +1,5 @@
+"use client";
+
 import Container from "../ui/Container";
 
 const planos = [
@@ -205,7 +207,7 @@ export default function PlanosMensais() {
     cursor: "pointer",
   }}
 >
-  FAZER PARTE
+  TESTE MERCADO PAGO
 </button>
 
             </div>
