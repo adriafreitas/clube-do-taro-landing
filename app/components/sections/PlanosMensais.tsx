@@ -4,7 +4,7 @@ const planos = [
   {
     nome: "Bronze",
     valor: "R$ 29,30",
-    link: "https://invoice.infinitepay.io/plans/adriafreitas/105eIC8ATO",
+    produtoId: "bronze",
     cor: "#B87333",
     glow: "rgba(184,115,51,.18)",
     badge: "",
@@ -17,7 +17,7 @@ const planos = [
   {
     nome: "Prata",
     valor: "R$ 49,91",
-    link: "https://invoice.infinitepay.io/plans/adriafreitas/jIsMl8x8Ib",
+    produtoId: "prata",
     cor: "#D9D9E6",
     glow: "rgba(217,217,230,.16)",
     badge: "",
@@ -30,7 +30,7 @@ const planos = [
   {
     nome: "Ouro",
     valor: "R$ 74,00",
-    link: "https://invoice.infinitepay.io/plans/adriafreitas/LVnaeyCaoA",
+    produtoId: "ouro",
     cor: "#E9C46A",
     glow: "rgba(233,196,106,.25)",
     badge: "Mais Escolhido",
@@ -43,7 +43,7 @@ const planos = [
   {
     nome: "Diamante",
     valor: "R$ 164,00",
-    link: "https://invoice.infinitepay.io/plans/adriafreitas/Wz3rtxCIAg",
+    produtoId: "diamante",
     cor: "#8ED8FF",
     glow: "rgba(142,216,255,.22)",
     badge: "Experiência Completa",
@@ -55,6 +55,48 @@ const planos = [
   },
 ];
 export default function PlanosMensais() {
+
+  async function comprar(produtoId: string) {
+  try {
+    const mapaPlanos = {
+      bronze: { plano: "Bronze", valor: 29.3 },
+      prata: { plano: "Prata", valor: 49.91 },
+      ouro: { plano: "Ouro", valor: 74.0 },
+      diamante: { plano: "Diamante", valor: 164.0 },
+    };
+
+    const plano = mapaPlanos[produtoId as keyof typeof mapaPlanos];
+
+    const res = await fetch(
+      "https://clube-do-taro.vercel.app/api/pagamentos/mercadopago/criar-preferencia",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nome: "Novo Assinante",
+          email: "cliente@temporario.com",
+          plano: plano.plano,
+          valor: plano.valor,
+        }),
+      }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert(data.erro || "Erro ao iniciar pagamento.");
+      return;
+    }
+
+    window.location.href = data.initPoint;
+  } catch (error) {
+    console.error(error);
+    alert("Erro ao conectar com o servidor.");
+  }
+}
+
   return (
     <section
       id="planos-mensais"
@@ -153,19 +195,18 @@ export default function PlanosMensais() {
 
 </ul>
 
-<a
-  href={plano.link}
-  target="_blank"
-  rel="noopener noreferrer"
+<button
+  onClick={() => comprar(plano.produtoId)}
   className="mt-12 block w-full rounded-full py-3.5 text-center text-[14px] font-semibold uppercase tracking-[0.25em]"
   style={{
     color: plano.cor,
     border: `1px solid ${plano.cor}55`,
     background: "rgba(255,255,255,.02)",
+    cursor: "pointer",
   }}
 >
   FAZER PARTE
-</a>
+</button>
 
             </div>
           ))}
