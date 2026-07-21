@@ -61,32 +61,36 @@ const planos = [
 ];
 
 export default function PlanosMensais() {
+async function comprar(plano: (typeof planos)[number]) {
+  try {
+    const resposta = await fetch(
+      "https://www.magiaoriente.com.br/api/pagamentos/mercadopago/criar-preferencia",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          plano: plano.produtoId,
+          valor: plano.valor,
+        }),
+      }
+    );
 
-  async function comprar(plano: (typeof planos)[number]) {
-    try {
-      
-  {
+    const dados = await resposta.json();
 
-     const resposta = await fetch(
-  "https://www.magiaoriente.com.br/api/pagamentos/mercadopago/criar-preferencia",
-  {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      plano: plano.produtoId,
-      valor: plano.valor,
-    }),
+    if (!dados.ok) {
+      alert("Erro ao criar o pagamento.");
+      return;
+    }
+
+    window.location.href = dados.initPoint;
+  } catch (erro) {
+    console.error(erro);
+    alert("Erro ao iniciar o pagamento.");
   }
-);
-
-const dados = await resposta.json();
-
-if (!dados.ok) {
-  alert("Erro ao criar o pagamento.");
-  return;
 }
+
 
   return (
     <section
