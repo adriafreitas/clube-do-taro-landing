@@ -1,28 +1,27 @@
 "use client";
 
 import Container from "../ui/Container";
-
 const planos = [
+
   {
-  nome: "Bronze",
-  valor: "R$ 29,30",
-  produtoId: "bronze",
-  cor: "#B87333",
-  link: "https://mpago.la/1rWP4T9",
-  glow: "rgba(184,115,51,.18)",
-  badge: "",
-  beneficios: [
-    "Direcionamentos Semanais",
-    "Biblioteca Digital",
-    "Conteúdos Exclusivos",
-  ],
-},
+    nome: "Bronze",
+    valor: 29.30,
+    produtoId: "bronze",
+    cor: "#B87333",
+    glow: "rgba(184,115,51,.18)",
+    badge: "",
+    beneficios: [
+      "Direcionamentos Semanais",
+      "Biblioteca Digital",
+      "Conteúdos Exclusivos",
+    ],
+  },
+
   {
     nome: "Prata",
-    valor: "R$ 49,91",
+    valor: 49.91,
     produtoId: "prata",
     cor: "#D9D9E6",
-    link: "https://mpago.la/2wD94Lo",
     glow: "rgba(217,217,230,.16)",
     badge: "",
     beneficios: [
@@ -31,12 +30,12 @@ const planos = [
       "Meditações Guiadas",
     ],
   },
+
   {
     nome: "Ouro",
-    valor: "R$ 74,00",
+    valor: 74.00,
     produtoId: "ouro",
     cor: "#E9C46A",
-    link: "https://mpago.la/1jZFLvD",
     glow: "rgba(233,196,106,.25)",
     badge: "Mais Escolhido",
     beneficios: [
@@ -45,12 +44,12 @@ const planos = [
       "Prioridade nas Novidades",
     ],
   },
+
   {
     nome: "Diamante",
-    valor: "R$ 164,00",
+    valor: 164.00,
     produtoId: "diamante",
     cor: "#8ED8FF",
-     link: "https://mpago.la/2dW59EK",
     glow: "rgba(142,216,255,.22)",
     badge: "Experiência Completa",
     beneficios: [
@@ -60,9 +59,56 @@ const planos = [
     ],
   },
 ];
+
 export default function PlanosMensais() {
 
-  
+  async function comprar(plano: (typeof planos)[number]) {
+    try {
+      
+      const resposta = await fetch(
+  "https://www.magiaoriente.com.br/api/pagamentos/mercadopago/criar-preferencia",
+  {
+
+const corsHeaders = {
+  "Access-Control-Allow-Origin":
+    "https://clube-do-taro-landing.vercel.app",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 204,
+    headers: corsHeaders,
+  });
+}
+
+
+
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+  plano: plano.produtoId,
+  valor: plano.valor,
+}),
+      });
+
+      const dados = await resposta.json();
+
+      if (!dados.ok) {
+        alert("Erro ao criar o pagamento.");
+        return;
+      }
+
+      window.location.href = dados.initPoint;
+    } catch (erro) {
+      console.error(erro);
+      alert("Erro ao iniciar o pagamento.");
+    }
+  }
+
   return (
     <section
       id="planos-mensais"
@@ -128,11 +174,14 @@ export default function PlanosMensais() {
   </h3>
 
   <div
-    className="mt-5 font-title text-[30px] leading-none font-normal"
-    style={{ color: plano.cor }}
-  >
-    {plano.valor}
-  </div>
+  className="mt-5 font-title text-[30px] leading-none font-normal"
+  style={{ color: plano.cor }}
+>
+  {plano.valor.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  })}
+</div>
 
   <p className="mt-3 text-[11px] uppercase tracking-[0.45em] text-white/45">
     assinatura mensal
@@ -148,6 +197,7 @@ export default function PlanosMensais() {
       className="flex items-start gap-3 text-[15px] leading-8 text-white/90"
     >
       <span
+
   className="mt-2 inline-block h-1.5 w-1.5 rounded-full"
   style={{
     background: plano.cor,
@@ -161,14 +211,13 @@ export default function PlanosMensais() {
 
 </ul>
 
-<a
-  href={plano.link}
-  target="_blank"
-  rel="noopener noreferrer"
+<button
+  onClick={() => comprar(plano)}
   className="mt-2 flex h-12 w-full items-center justify-center rounded-full bg-gradient-to-r from-violet-700 via-fuchsia-600 to-purple-600 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:scale-[1.03] hover:shadow-violet-500/40"
 >
   Quero fazer parte
-</a>
+
+  </button>
 
             </div>
           ))}
