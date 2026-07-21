@@ -69,21 +69,6 @@ export default function PlanosMensais() {
   "https://www.magiaoriente.com.br/api/pagamentos/mercadopago/criar-preferencia",
   {
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin":
-    "https://clube-do-taro-landing.vercel.app",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type",
-};
-
-export async function OPTIONS() {
-  return new NextResponse(null, {
-    status: 204,
-    headers: corsHeaders,
-  });
-}
-
-
 
         method: "POST",
         headers: {
