@@ -79,18 +79,17 @@ async function comprar(plano: (typeof planos)[number]) {
 
     const dados = await resposta.json();
 
-    if (!dados.ok) {
-      alert("Erro ao criar o pagamento.");
-      return;
-    }
+console.log("STATUS:", resposta.status);
+console.log("RESPOSTA:", dados);
 
-    window.location.href = dados.initPoint;
-  } catch (erro) {
-    console.error(erro);
-    alert("Erro ao iniciar o pagamento.");
-  }
+if (!resposta.ok || !dados.ok) {
+  alert(
+    JSON.stringify(dados, null, 2)
+  );
+  return;
 }
 
+window.location.href = dados.initPoint;
 
   return (
     <section
