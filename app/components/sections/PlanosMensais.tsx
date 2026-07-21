@@ -8,7 +8,7 @@ const planos = [
   valor: "R$ 29,30",
   produtoId: "bronze",
   cor: "#B87333",
-  link: "https://mpago.la/2ZBPjxV",
+  link: "https://mpago.la/1rWP4T9",
   glow: "rgba(184,115,51,.18)",
   badge: "",
   beneficios: [
