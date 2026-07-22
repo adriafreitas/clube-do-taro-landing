@@ -79,18 +79,20 @@ async function comprar(plano: (typeof planos)[number]) {
 
     const dados = await resposta.json();
 
-console.log("STATUS:", resposta.status);
-console.log("RESPOSTA:", dados);
+    console.log("STATUS:", resposta.status);
+    console.log("RESPOSTA:", dados);
 
-if (!resposta.ok || !dados.ok) {
-  alert(
-    JSON.stringify(dados, null, 2)
-  );
-  return;
-}
+    if (!resposta.ok || !dados.ok) {
+      alert(JSON.stringify(dados, null, 2));
+      return;
+    }
 
-window.location.href = dados.initPoint;
-
+    window.location.href = dados.initPoint;
+  } catch (erro) {
+    console.error(erro);
+    alert("Erro ao iniciar o pagamento.");
+  }
+ }
   return (
     <section
       id="planos-mensais"
