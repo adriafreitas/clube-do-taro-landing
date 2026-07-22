@@ -5,7 +5,7 @@ const planos = [
 
   {
     nome: "Bronze",
-    valor: 1.00,
+    valor: 29.30,
     produtoId: "bronze",
     cor: "#B87333",
     glow: "rgba(184,115,51,.18)",
